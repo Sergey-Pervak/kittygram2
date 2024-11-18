@@ -24,16 +24,28 @@ class Cat(models.Model):
     color = models.CharField(max_length=16, choices=CHOICES)
     birth_year = models.IntegerField()
     owner = models.ForeignKey(
-        User, related_name='cats', on_delete=models.CASCADE)
-    achievements = models.ManyToManyField(Achievement, through='AchievementCat')
+        User,
+        related_name='cats',
+        on_delete=models.CASCADE
+    )
+    achievements = models.ManyToManyField(
+        Achievement,
+        through='AchievementCat'
+    )
 
     def __str__(self):
         return self.name
 
 
 class AchievementCat(models.Model):
-    achievement = models.ForeignKey(Achievement, on_delete=models.CASCADE)
-    cat = models.ForeignKey(Cat, on_delete=models.CASCADE)
+    achievement = models.ForeignKey(
+        Achievement,
+        on_delete=models.CASCADE
+    )
+    cat = models.ForeignKey(
+        Cat,
+        on_delete=models.CASCADE
+    )
 
     def __str__(self):
         return f'{self.achievement} {self.cat}'
